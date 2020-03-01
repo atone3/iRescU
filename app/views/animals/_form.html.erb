@@ -1,0 +1,57 @@
+<%= form_with(model: animal, local: true) do |form| %>
+  <% if animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
+
+      <ul>
+      <% animal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_area :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birthday %>
+    <%= form.text_area :birthday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :outcometype %>
+    <%= form.text_area :outcometype %>
+  </div>
+
+  <div class="field">
+    <%= form.label :outcomesubtype %>
+    <%= form.text_area :outcomesubtype %>
+  </div>
+
+  <div class="field">
+    <%= form.label :animaltype %>
+    <%= form.text_area :animaltype %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sex %>
+    <%= form.text_area :sex %>
+  </div>
+
+  <div class="field">
+    <%= form.label :breed %>
+    <%= form.text_area :breed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :color %>
+    <%= form.text_area :color %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

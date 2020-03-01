@@ -34,6 +34,13 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# Boostrap
+gem 'bootstrap', '~> 4.0.0'
+gem 'jquery-rails'
+
+## Gemfile for Rails 3+, Sinatra, or Merb
+gem 'will_paginate', '~> 3.1.1'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
