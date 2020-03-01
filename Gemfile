@@ -39,7 +39,7 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 
 ## Gemfile for Rails 3+, Sinatra, or Merb
-gem 'will_paginate', '~> 3.1.1'
+gem 'will_paginate'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
