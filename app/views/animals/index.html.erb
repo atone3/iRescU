@@ -2,7 +2,10 @@
 
 <h1>Animals</h1>
 
+<%= link_to 'New Animal', new_animal_path, :class => "btn btn-primary text-white" %>
+
 <%= will_paginate @animals %>
+
 
 <table class="table table-light">
   <thead>
@@ -42,4 +45,4 @@
 
 <br>
 
-<%= link_to 'New Animal', new_animal_path %>
+
