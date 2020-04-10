@@ -38,6 +38,7 @@ gem 'jquery-rails'
 # Boostrap
 gem 'bootstrap', '~> 4.0.0'
 
+gem 'will_paginate-bootstrap4'
 
 gem 'faker'
 

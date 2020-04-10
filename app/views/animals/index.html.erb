@@ -2,8 +2,7 @@
 
 <h1>Animals</h1>
 
-<%= will_paginate @animals %>
-
+<%= will_paginate @animals, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 
 <table class="table table-light">
   <thead>
