@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>iResc-U</title>
+    <title>iRESC-U</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     
@@ -20,9 +20,9 @@
   <body>
     
     <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white">
-      <div class="container my-1">
+      <div class="container py-1">
         <%= link_to root_path do %>
-          <img src="assets/irescu_logo.svg" width=160 />
+          <img src="/assets/irescu_logo.svg" width=160 />
         <% end %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -41,7 +41,10 @@
           </ul>
                       
           <span>
-            <%= link_to 'Add New Intake', new_animal_path, :class => "btn btn-primary text-white" %>
+            <%= link_to new_animal_path, :class => "btn btn-primary" do %>
+             <i class="material-icons d-inline mr-1" style="vertical-align: middle; font-size: 18px; line-height: 1.5;">add_circle_outline</i>
+              New Intake
+            <% end %>
           </span>
         </div>
     </div>
