@@ -7,7 +7,8 @@
   <div class="text-secondary"><%= number_with_delimiter(@results_count, :delimiter => ',') %> results</div>
 </div>
 
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between flex-wrap">
+  <div>
   <%= form_tag(animals_path, method: :get) do %>
     <div class="form-row align-items-left">
       <div class="col">
@@ -31,6 +32,7 @@
       </div>
     </div>
   <% end %>
+  </div>
   
   <div>
     <%= will_paginate @animals, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, inner_window: 1  %>
