@@ -4,8 +4,16 @@ class AnimalsController < ApplicationController
   # GET /animals
   # GET /animals.json
   def index
-    @animals = Animal.all.order(:id).paginate(:page => params[:page], :per_page => 500)
-    @total = Animal.all.count
+    # check for search filters
+    @animals = Animal.where(
+    "name like :name and animaltype like :type and outcometype like :outcometype",
+      {name: "%#{params[:name]}%", type: "%#{params[:type]}%", outcometype: "%#{params[:outcometype]}%"}
+    )
+    
+    @results_count = @animals.count
+    
+    # add pagination to results
+    @animals = @animals.paginate(:page => params[:page], :per_page => 500)
   end
 
   # GET /animals/1
