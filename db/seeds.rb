@@ -28,10 +28,6 @@ CSV.foreach(Rails.root.join('lib/Austin_Animal_Center_Outcomes.csv'), headers: t
     end
   end
   
-  if (!name.blank?) 
-    name.gsub!('*', '') 
-  end
-  
   a.update_attributes(
     :name =>  name,
     :birthday => row[1],
