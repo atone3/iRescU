@@ -14,10 +14,14 @@
         <%= text_field_tag :name, params[:name], class: "form-control ml-0 mr-2", placeholder: "Name", autocomplete: 'off' %>
       </div>
       <div class="col">
-        <%= select_tag :type, options_for_select([ "Bird", "Cat", "Dog", "Livestock", "Other" ], params[:type]), include_blank: "Type", class: "form-control ml-0 mr-2" %>
+        <%= select_tag :type, options_for_select([ "Bird", "Cat", "Dog", "Livestock", "Other" ], 
+            params[:type]), include_blank: "Any Type", class: "form-control ml-0 mr-2", 
+            onchange: 'this.form.submit()' %>
       </div>
       <div class="col">
-        <%= select_tag :outcometype, options_for_select(["Adoption", "Died", "Euthanasia", "Missing", "Return to Owner", "Transfer"], params[:outcometype]), include_blank: "Outcome", class: "form-control ml-0 mr-2" %>
+        <%= select_tag :outcometype, options_for_select(["Adoption", "Died", "Euthanasia", "Missing", "Return to Owner", "Transfer"], 
+            params[:outcometype]), include_blank: "Any Outcome", class: "form-control ml-0 mr-2",
+            onchange: 'this.form.submit()' %>
       </div>
       <div class="col-auto">
         <%= submit_tag 'Search', class: "btn btn-primary" %>
@@ -28,7 +32,9 @@
     </div>
   <% end %>
   
-  <div><%= will_paginate @animals, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, inner_window: 1  %></div>
+  <div>
+    <%= will_paginate @animals, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, inner_window: 1  %>
+  </div>
 </div>
 
 <br>
