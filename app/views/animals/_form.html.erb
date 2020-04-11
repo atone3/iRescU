@@ -1,11 +1,11 @@
 <%= form_with(model: animal, local: true) do |form| %>
   <% if animal.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
+      <h5 style="color: #ee2740;"><%= pluralize(animal.errors.count, "error") %> prohibited this animal from being saved:</h5>
 
       <ul>
       <% animal.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li style="color: #ee2740;"><%= message %></li>
       <% end %>
       </ul>
     </div>
