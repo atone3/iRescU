@@ -13,3 +13,16 @@
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #f5f5f5;
+}
+
+.hidden {
+    visibility: hidden !important;
+    text-decoration: none !important;
+}
+
+tr:hover > td > span > a {
+    visibility: visible !important;
+}
