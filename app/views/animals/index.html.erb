@@ -53,6 +53,7 @@
       <th>Color</th>
       <th>Outcome</th>
       <th>Remarks</th>
+      <th>Intake Date</th>
       <th></th>
     </tr>
   </thead>
@@ -69,6 +70,7 @@
         <td><%= animal.color %></td>
         <td><%= animal.outcometype %></td>
         <td><%= animal.outcomesubtype %></td>
+        <td><% if !animal.intake_date.nil? %><%= animal.intake_date.strftime('%-m/%-d/%Y') %><% end %></td>
         <td>
           <span class="text-nowrap">
           <%= link_to animal, :class => "hidden mr-1" do %>

@@ -30,6 +30,10 @@ class AnimalsController < ApplicationController
 
   # GET /animals/1/edit
   def edit
+    if (params[:intake_date]) 
+      params[:intake_date] = params[:intake_date].strftime('%-m/%-d/%Y')
+      puts("!!!!")
+    end
   end
 
   # POST /animals
@@ -80,6 +84,6 @@ class AnimalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def animal_params
-      params.require(:animal).permit(:name, :birthday, :outcometype, :outcomesubtype, :animaltype, :sex, :breed, :color)
+      params.require(:animal).permit(:name, :birthday, :outcometype, :outcomesubtype, :animaltype, :sex, :breed, :color, :intake_date)
     end
 end

@@ -13,6 +13,9 @@
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import "pickadate/default";
+@import "pickadate/default.date";
+@import "pickadate/default.time";
 
 /** for fixed navbar **/
 body {

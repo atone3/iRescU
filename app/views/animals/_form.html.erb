@@ -12,15 +12,29 @@
   <% end %>
   
   <div class="form-group form-row">
-    <div class="col-6">
+    <div class="col-4">
       <%= form.label :name %>
       <%= form.text_field :name, :class => "form-control" %>
     </div>
-    <div class="col-6">
+    <div class="col-4">
       <%= form.label "Animal Type" %>
       <%= form.select(:animaltype, ['Bird', 'Cat', 'Dog', 'Livestock', 'Other'], {}, {:class => "form-control"}) %>
     </div>
+    <div class="col-4">
+      <%= form.label :intake_date %>
+      <%= form.text_field :intake_date, :class => "datepicker form-control" %>
+    </div>
   </div>
+  
+  
+  <!-- Initialize date pickers -->
+  <script>
+    $('.datepicker').pickadate({
+      format: 'mmmm d, yyyy'
+    })
+  </script>
+  
+  
 
   <div class="form-group form-row">
     <div class="col-6">
@@ -54,6 +68,8 @@
       <%= form.text_field :outcomesubtype, :class => "form-control" %>
     </div>
   </div>
+  
+  
 
   <div class="actions pt-3">
     <%= form.submit :class => "btn btn-primary mr-1" %>

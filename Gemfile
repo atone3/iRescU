@@ -38,6 +38,9 @@ gem 'jquery-rails'
 # Boostrap
 gem 'bootstrap', '~> 4.0.0'
 
+# Implement pickadate.js
+gem 'pickadate-rails'
+
 gem 'will_paginate-bootstrap4'
 
 gem 'faker'

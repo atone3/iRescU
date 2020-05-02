@@ -17,3 +17,5 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require pickadate/picker
+//= require pickadate/picker.date 
