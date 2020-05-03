@@ -12,7 +12,7 @@ require 'faker'
 CSV.foreach(Rails.root.join('lib/Austin_Animal_Center_Outcomes.csv'), headers: true) do |row|
   
   name = row[0]
-  birthday = row[1]
+  birthday = row[1].insert(-3, '20')
   
   if (name.blank? || name.nil? || name.include?("0") || name.include?("1") || name.include?("2") || name.include?("3") || name.include?("4") || name.include?("5") || name.include?("6") || name.include?("7") || name.include?("8") || name.include?("9"))
     if (row[4].downcase == 'cat')
@@ -26,15 +26,20 @@ CSV.foreach(Rails.root.join('lib/Austin_Animal_Center_Outcomes.csv'), headers: t
     end
   end
   
+  intake_date = Faker::Date.between(from: Date.strptime(birthday, '%m/%d/%Y'), to: 10.days.ago)
+  outcome_date = Faker::Date.between(from: intake_date, to: 1.day.ago)
+  
   Animal.create(
     :name =>  name,
-    :birthday => row[1],
+    :birthday => birthday,
     :outcometype => row[2],
     :outcomesubtype => row[3],
     :animaltype => row[4],
     :sex => row[5],
     :breed => row[6],
-    :color => row[7]
+    :color => row[7],
+    :intake_date => intake_date,
+    :outcome_date => outcome_date
   )
 
 end
