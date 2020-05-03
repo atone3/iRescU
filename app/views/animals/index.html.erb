@@ -3,7 +3,7 @@
 <!--</p>-->
 
 <div class="d-flex my-4 p-0 align-items-baseline">
-  <div class="h1 mr-3">Animals</div>
+  <div class="h1 mr-3">Animals<%= controller.controller_name %></div>
   <div class="text-secondary"><%= number_with_delimiter(@results_count, :delimiter => ',') %> results</div>
 </div>
 
@@ -44,6 +44,7 @@
 <table class="table table-light table-hover">
   <thead>
     <tr>
+      <th>Intake Date</th>
       <th>Name</th>
       <th>Type</th>
       <th>Birthday</th>
@@ -51,7 +52,6 @@
       <th>Breed</th>
       <th>Outcome</th>
       <th>Remarks</th>
-      <th>Intake Date</th>
       <th>Outcome Date</th>
       <th></th>
     </tr>
@@ -60,6 +60,7 @@
   <tbody>
     <% @animals.each do |animal| %>
       <tr>
+        <td><% if !animal.intake_date.nil? %><%= animal.intake_date.strftime('%-m/%-d/%Y') %><% end %></td>
         <td><%= animal.name %></td>
         <td><%= animal.animaltype %></td>
         <td><%= animal.birthday %></td>
@@ -67,7 +68,6 @@
         <td><%= animal.breed %></td>
         <td><%= animal.outcometype %></td>
         <td><%= animal.outcomesubtype %></td>
-        <td><% if !animal.intake_date.nil? %><%= animal.intake_date.strftime('%-m/%-d/%Y') %><% end %></td>
         <td><% if !animal.outcome_date.nil? %><%= animal.outcome_date.strftime('%-m/%-d/%Y') %><% end %></td>
         <td>
           <span class="text-nowrap">

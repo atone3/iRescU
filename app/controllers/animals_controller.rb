@@ -15,7 +15,8 @@ class AnimalsController < ApplicationController
     @results_count = @animals.count
     
     # paginate results 
-    @animals = @animals.paginate(:page => params[:page], :per_page => 500).order(:id)
+    @animals = @animals.order("intake_date DESC").paginate(:page => params[:page], :per_page => 500)
+    
   end
 
   # GET /animals/1

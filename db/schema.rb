@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_205331) do
+ActiveRecord::Schema.define(version: 2020_05_03_230617) do
 
   create_table "animals", force: :cascade do |t|
     t.text "name"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 2020_05_03_205331) do
     t.datetime "updated_at", null: false
     t.datetime "intake_date"
     t.datetime "outcome_date"
+  end
+
+  create_table "enclosures", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

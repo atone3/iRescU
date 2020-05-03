@@ -29,11 +29,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-4 mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item <% if controller.controller_name == "animals" %>active<% end %>">
               <%= link_to animals_path, :class => "nav-link" do %>Animals<% end %>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Map View</a>
+            <li class="nav-item <% if controller.controller_name == "enclosures" %>active<% end %>">
+              <%= link_to enclosures_path, :class => "nav-link" do %>Map View<% end %>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled" href="#">Reporting</a>
