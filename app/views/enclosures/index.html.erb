@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Animal</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
     <% @enclosures.each do |enclosure| %>
       <tr>
         <td><%= enclosure.name %></td>
+        <td><% if !Animal.where(enclosure_id: enclosure.id).blank? %><%= Animal.find_by_enclosure_id(enclosure.id).name %><% end %></td>
         <td><%= link_to 'Show', enclosure %></td>
         <td><%= link_to 'Edit', edit_enclosure_path(enclosure) %></td>
         <td><%= link_to 'Destroy', enclosure, method: :delete, data: { confirm: 'Are you sure?' } %></td>

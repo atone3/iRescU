@@ -63,6 +63,12 @@
     </div>
   </div>
 
+  <div class="form-group form-row">
+    <div class="col">
+      <%= form.label "Enclosure" %>
+      <%= form.select(:enclosure_id, ['1', '2'], {:include_blank => true}, {:class => "form-control"}) %>
+    </div>
+  </div>
   
     <!-- Initialize date pickers -->
   <script>
