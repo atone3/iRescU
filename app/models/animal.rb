@@ -3,6 +3,7 @@ class Animal < ApplicationRecord
   
   validates :name, presence: true
   validates :intake_date, presence: true
+  validates :outcometype, presence: true
   
   # TODO: birthday < intakeDate;
   # Status: Active, Inactive

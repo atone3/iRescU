@@ -55,32 +55,45 @@
     </div>
     <div class="col-4">
       <%= form.label "Outcome" %>
-      <%= form.select(:outcometype, ['Adoption', 'Died', 'Euthanasia', 'Missing', 'Return to Owner', 'Transfer'], {:include_blank => true}, {:class => "form-control"}) %>
+      <%= form.select(:outcometype, ['Active', 'Adoption', 'Died', 'Euthanasia', 'Missing', 'Return to Owner', 'Transfer'], {}, 
+      {:class => "form-control", :id => "outcome", :onChange => "toggleEnclosures();"}) %>
     </div>
     <div class="col-4">
       <%= form.label "Outcome remarks" %>
       <%= form.text_field :outcomesubtype, :class => "form-control" %>
     </div>
   </div>
+  
 
-  <div class="form-group form-row">
+  <div class="form-group form-row" id="enclosures">
     <div class="col">
       <%= form.label "Enclosure" %>
-      <%= form.select(:enclosure_id, ['1', '2'], {:include_blank => true}, {:class => "form-control"}) %>
+      <%= form.select(:enclosure_id, ['1', '2'], {:include_blank => true}, {:class => "form-control", :id => "enclosuresField"}) %>
     </div>
   </div>
   
-    <!-- Initialize date pickers -->
-  <script>
-    $('.datepicker').pickadate({
-      format: 'mmmm d, yyyy'
-    })
-  </script>
-  
-  
-
   <div class="actions pt-3">
     <%= form.submit :class => "btn btn-primary mr-1" %>
     <%= link_to animals_path, :class => "btn btn-outline-secondary" do %>Cancel<% end %>
   </div>
 <% end %>
+
+  <script>
+    //Initialize date pickers
+      $('.datepicker').pickadate({
+      format: 'mmmm d, yyyy'
+    });
+    
+    function toggleEnclosures() {
+      if ($("#outcome").val() === "Active") {
+        $("#enclosures").show();
+      } else {
+        $("#enclosuresField").val("")
+        $("#enclosures").hide();
+      }
+    }
+    
+    $(document).ready(function() {
+      toggleEnclosures();
+    });
+  </script>
