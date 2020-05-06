@@ -68,7 +68,7 @@
   <div class="form-group form-row" id="enclosures">
     <div class="col">
       <%= form.label "Enclosure" %>
-      <%= form.select(:enclosure_id, ['1', '2'], {:include_blank => true}, {:class => "form-control", :id => "enclosuresField"}) %>
+      <%= form.select(:enclosure_id, Enclosure.where("animal_id is null or animal_id = :id", {id: @animal.id}).order(:name).map{ |e| [e.name, e.id]}, {:include_blank => true}, {:class => "form-control", :id => "enclosuresField"}) %>
     </div>
   </div>
   

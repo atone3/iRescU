@@ -44,6 +44,9 @@ class AnimalsController < ApplicationController
 
     respond_to do |format|
       if @animal.save
+        if !@animal.enclosure_id.nil?
+          Enclosure.find_by_id(@animal.enclosure_id).update_attribute(:animal_id, @animal.id)
+        end
         format.html { redirect_to @animal, notice: 'Animal was successfully created.' }
         format.json { render :show, status: :created, location: @animal }
       else
@@ -56,8 +59,17 @@ class AnimalsController < ApplicationController
   # PATCH/PUT /animals/1
   # PATCH/PUT /animals/1.json
   def update
+    enclosure = @animal.enclosure_id
+    
     respond_to do |format|
       if @animal.update(animal_params)
+        if @animal.enclosure_id != enclosure && !enclosure.nil?
+          Enclosure.find_by_id(enclosure).update_attribute(:animal_id, "") # clear previous
+        end
+        
+        if !@animal.enclosure_id.nil?
+          Enclosure.find_by_id(@animal.enclosure_id).update_attribute(:animal_id, @animal.id)
+        end
         format.html { redirect_to @animal, notice: 'Animal was successfully updated.' }
         format.json { render :show, status: :ok, location: @animal }
       else
@@ -72,6 +84,9 @@ class AnimalsController < ApplicationController
   def destroy
     @animal.destroy
     respond_to do |format|
+      if !@animal.enclosure_id.nil?
+        Enclosure.find_by_id(@animal.enclosure_id).update_attribute(:animal_id, "")
+      end
       format.html { redirect_to animals_url, notice: 'Animal was successfully destroyed.' }
       format.json { head :no_content }
     end
