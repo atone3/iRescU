@@ -31,10 +31,7 @@ class AnimalsController < ApplicationController
 
   # GET /animals/1/edit
   def edit
-    if (params[:intake_date]) 
-      params[:intake_date] = params[:intake_date].strftime('%-m/%-d/%Y')
-      puts("!!!!")
-    end
+   
   end
 
   # POST /animals

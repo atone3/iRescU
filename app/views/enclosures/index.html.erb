@@ -1,11 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Enclosures</h1>
+<div class="d-flex my-4 p-0 align-items-baseline">
+<h1 class="mr-3">Map View</h1>
+</div>
 
 <%= render 'map' %>
 
 
-<table class="table">
+<table class="table mt-4 pt-4">
   <thead>
     <tr>
       <th>Name</th>
@@ -19,17 +21,27 @@
       <tr>
         <td><%= enclosure.name %></td>
         <td>
-        <% if !enclosure.animal_id.nil? %>
-          <%= Animal.find_by_id(enclosure.animal_id).name %>
+          <% if !enclosure.animal_id.nil? %>
+            <%= Animal.find_by_id(enclosure.animal_id).name %>
+          <% end %>
+          
           <script>
             var enclosure_id = '<%= enclosure.name %>'
             var $enclosure = $('[id="' + enclosure_id + '"]');
 
-            $enclosure.removeClass("st0").addClass("occupied");
             $enclosure.attr("data-toggle", "tooltip");
-            $enclosure.attr("title", '<%= Animal.find_by_id(enclosure.animal_id).name %>');
+            
+            
+            <% if !enclosure.animal_id.nil? %>
+              var animal_id = '<%= enclosure.animal_id %>';
+              
+              $enclosure.removeClass("st11").addClass("occupied");
+              $enclosure.attr("title", enclosure_id + '<br><%= Animal.find_by_id(enclosure.animal_id).name %>')
+              .attr("data-html", "true").attr("onclick", ("window.location.assign('/animals/" + animal_id + "');"));
+            <% else %>
+              $enclosure.attr("title", enclosure_id);
+            <% end %>
           </script>
-        <% end %>
         </td>
         <td><%= link_to 'Show', enclosure %></td>
         <td><%= link_to 'Edit', edit_enclosure_path(enclosure) %></td>
