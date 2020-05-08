@@ -52,10 +52,14 @@
   <%= @animal.color %>
 </p>
 
+
+<% if !@animal.enclosure_id.nil? %>
 <p>
-  <strong>Enclosure:</strong>
-  <%= @animal.enclosure_id %>
+<strong>Enclosure:</strong>
+  <%= Enclosure.find_by_id(@animal.enclosure_id).name %>
 </p>
+<% end %>
+
 
 <%= link_to 'Edit', edit_animal_path(@animal) %> |
 <%= link_to 'Back', animals_path %>
