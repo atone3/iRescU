@@ -1,4 +1,4 @@
-<%= form_with(model: animal, local: true) do |form| %>
+<%= form_with(model: animal, local: true, multipart: true) do |form| %>
   <% if animal.errors.any? %>
     <div id="error_explanation">
       <h5 style="color: #ee2740;"><%= pluralize(animal.errors.count, "error") %> prohibited this animal from being saved:</h5>
@@ -23,6 +23,13 @@
     <div class="col-4">
       <%= form.label :intake_date %>
       <%= form.text_field :intake_date, :class => "datepicker form-control" %>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="field">
+      <%= form.label :avatar %>
+      <%= form.file_field :avatar %>
     </div>
   </div>
   
