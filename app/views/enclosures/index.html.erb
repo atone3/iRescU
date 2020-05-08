@@ -2,15 +2,15 @@
 
 
 <h1 class="mt-4">Map View</h1>
-<p class="lead text-secondary">Hover over the enclosures below to see who's in each area.</p>
+<p class="lead text-secondary">Hover over the enclosures below to see where each intake is located.<br>
+Click on an occupied enclosure to view the occupant's details.</p>
 
 
 <div class="container py-4 px-4" style="border: 2px solid #eaeaea; border-radius: 6px;">
   <%= render 'map' %>
 </div>
 
-
-<table class="table table-sm mt-4 pt-4">
+<table class="table table-sm mt-4 pt-4 d-none">
   <thead>
     <tr>
       <th>Location</th>
@@ -55,7 +55,7 @@
 
 <br>
 
-<%= link_to 'New Enclosure', new_enclosure_path %>
+<%= link_to 'New Enclosure', new_enclosure_path, :class => "d-none" %>
 
 <script>
 // initialize all toolips
