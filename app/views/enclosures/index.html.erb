@@ -1,16 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<div class="d-flex my-4 p-0 align-items-baseline">
-<h1 class="mr-3">Map View</h1>
+
+<h1 class="mt-4">Map View</h1>
+<p class="lead text-secondary">Hover over the enclosures below to see who's in each area.</p>
+
+
+<div class="container py-4 px-4" style="border: 2px solid #eaeaea; border-radius: 6px;">
+  <%= render 'map' %>
 </div>
 
-<%= render 'map' %>
 
-
-<table class="table mt-4 pt-4">
+<table class="table table-sm mt-4 pt-4">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Location</th>
       <th>Animal</th>
       <th colspan="2"></th>
     </tr>

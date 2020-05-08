@@ -1,65 +1,49 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @animal.name %>
-</p>
 
-<p>
-  <strong>Intake Date:</strong>
-  <%= @animal.intake_date.strftime('%-m/%-d/%Y') %>
-</p>
+<div class="row">
+  <div class="col-5 mx-auto">
 
-<p>
-  <strong>Birthday:</strong>
-  <%= @animal.birthday %>
-</p>
-
-<% if !@animal.outcome_date.nil? %>
-<p>
-  <strong>Outcome date:</strong>
-  <%= @animal.outcome_date.strftime('%-m/%-d/%Y') %>
-</p>
-<% end %>
-
-<p>
-  <strong>Outcometype:</strong>
-  <%= @animal.outcometype %>
-</p>
-
-<p>
-  <strong>Outcomesubtype:</strong>
-  <%= @animal.outcomesubtype %>
-</p>
-
-<p>
-  <strong>Animaltype:</strong>
-  <%= @animal.animaltype %>
-</p>
-
-<p>
-  <strong>Sex:</strong>
-  <%= @animal.sex %>
-</p>
-
-<p>
-  <strong>Breed:</strong>
-  <%= @animal.breed %>
-</p>
-
-<p>
-  <strong>Color:</strong>
-  <%= @animal.color %>
-</p>
+    <ul class="list-group py-4">
+      <li class="list-group-item active" style="background-color: #ee2740; border-color: #ee2740;">
+        <h1 class="ml-3"><%= @animal.name %></h1>
+      </li>
+      <li class="list-group-item">
+          <h6 class="d-inline col-2">Type:</h6><%= @animal.animaltype %>
+      </li>
+      <li class="list-group-item">
+          <h6 class="d-inline col-2">Sex:</h6><%= @animal.sex %>
+      </li>
+      <li class="list-group-item">
+          <h6 class="d-inline col-2">Breed:</h6><%= @animal.breed %>
+      </li>
+      <li class="list-group-item">
+          <h6 class="d-inline col-2">Color:</h6><%= @animal.color %>
+      </li>
+      <li class="list-group-item">
+        <h6 class="d-inline col-2">Birthday:</h6> <%= @animal.birthday %>
+      </li>
+      <li class="list-group-item">
+        <h6 class="d-inline col-2">Location: </h6> <% if !@animal.enclosure_id.nil? %><%= Enclosure.find_by_id(@animal.enclosure_id).name %><% end %>
+      </li>
+      <li class="list-group-item">
+        <h6 class="d-inline col-2">Intake Date:</h6> <%= @animal.intake_date.strftime('%-m/%-d/%Y') %>
+      </li>
+      <li class="list-group-item">
+        <h6 class="d-inline col-2">Outcome: </h6> <%= @animal.outcometype %>
+      </li>
+      <li class="list-group-item">
+        <h6 class="d-inline col-2">Outcome Subtype: </h6> <%= @animal.outcomesubtype %>
+      </li>
+      <li class="list-group-item">
+        <h6 class="d-inline col-2">Outcome Date: </h6><% if !@animal.outcome_date.nil?%><%= @animal.outcome_date.strftime('%-m/%-d/%Y') %><% end %>
+      </li>
+    </ul>
+    
+    <%= link_to 'Edit Details', edit_animal_path(@animal), :class => "btn btn-primary" %>
+    <%= link_to 'Go Back', request.referrer, :class => "btn btn-outline-primary" %>
+    
+  </div>
+</div>
 
 
-<% if !@animal.enclosure_id.nil? %>
-<p>
-<strong>Enclosure:</strong>
-  <%= Enclosure.find_by_id(@animal.enclosure_id).name %>
-</p>
-<% end %>
-
-
-<%= link_to 'Edit', edit_animal_path(@animal) %> |
-<%= link_to 'Back', animals_path %>
