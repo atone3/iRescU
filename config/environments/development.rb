@@ -63,8 +63,8 @@ Rails.application.configure do
   storage: :s3,
   s3_credentials: {
     bucket: 'irescu-bucket',
-    access_key_id: 'AKIAJEJALPXKZRLETMAQ',
-    secret_access_key: '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',
+    access_key_id: 'AKIAJAWN7QXZW4PD5HUQ',
+    secret_access_key: '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',
     s3_region: 'us-east-1',
   }
 }
