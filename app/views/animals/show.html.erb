@@ -3,7 +3,12 @@
 
 <div class="row">
   <div class="col-3 mt-4 mr-1 ml-auto">
-    <%= image_tag @animal.avatar.url, :class => "img-thumbnail mb-3" %>
+    
+    <% if @animal.avatar_file_name.nil? %>
+      <%= image_tag "/assets/default_animal_image.png", :class => "img-thumbnail mb-3" %>
+    <% else %>
+      <%= image_tag @animal.avatar.url, :class => "img-thumbnail mb-3" %>
+    <% end %>
         
     <%= link_to 'Edit Details', edit_animal_path(@animal), :class => "btn btn-primary" %>
     <%= link_to 'Go Back', animals_path, :class => "btn btn-outline-primary" %>
