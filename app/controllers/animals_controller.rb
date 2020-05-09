@@ -110,6 +110,7 @@ class AnimalsController < ApplicationController
       #EXTRACT(year FROM created_at)
       @animals = Animal.select("EXTRACT(year FROM outcome_date) as outcome_year, count(id) as total_id").where(outcometype: "Adoption").group("EXTRACT(year FROM outcome_date)")
     end
+    @animals = @animals.order("outcome_year ASC")
     @animal_json = @animals.to_json
     
     #@animals_cleaned = @animals.map{|a| {
