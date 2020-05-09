@@ -1,100 +1,21 @@
 <h1 class="my-4">Adoptions By Year</h1>
 
+<%= form_tag("/animals/adoptions", method: :get) do %>
+<div class="form-row align-items-left">
+  <div class="col-3">
+    <%= select_tag :report, options_for_select(["Yearly Adoptions", "Adoption by Dog Breeds"], 
+        params[:report]), class: "form-control ml-0 mr-2",
+        onchange: 'this.form.submit()' %>
+  </div>
+  <div class="col-auto">
+    <%= submit_tag 'Search', class: "btn btn-primary" %>
+  </div>
+</div>
+<% end %>
+  
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-
-<script>
-
-$(document).ready(function() {
-    
-
-
-var margin = {top: 30, right: 10, bottom: 90, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 530 - margin.top - margin.bottom;
-
-// Parse the date / time
-var	parseDate = d3.time.format("%Y").parse;
-
-// Define the div for the tooltip
-var div = d3.select("body").append("div")	
-    .attr("class", "tooltip")				
-    .style("opacity", 0);
-
-var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-
-var y = d3.scale.linear().range([height, 0]);
-
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom")
-    .tickFormat(d3.time.format("%Y"));
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .ticks(10);
-
-var svg = d3.select(".container:nth-child(2)").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", 
-          "translate(" + margin.left + "," + margin.top + ")");
-
-var data_raw = '<%= @animal_json %>'
-var data = jQuery.parseJSON(data_raw.replace(/&quot;/g,'"'));
-//console.log(data_raw);
-
-data.forEach(function(item) {
-   item.outcome_year = parseDate(("" + item.outcome_year));
-});
-
-x.domain(data.map(function(d) { return d.outcome_year; }));
-y.domain([0, d3.max(data, function(d) { return d.total_id; })]);
-
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-    .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", "-.55em")
-      .attr("transform", "rotate(-90)" );
-
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Number of Adoptions");
-
-  svg.selectAll("bar")
-      .data(data)
-    .enter().append("rect")
-      .style("fill", "steelblue")
-      .attr("x", function(d) { return x(d.outcome_year); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.total_id); })
-      .attr("height", function(d) { return height - y(d.total_id); })
-      .on("mouseover", function(d) {		
-            div.transition()		
-                .duration(200)		
-                .style("opacity", .9);		
-            div	.html(d.outcome_year.getFullYear() + "<br/>"  + d.total_id.toLocaleString() + " adoptions")	
-                .style("left", (d3.event.pageX) + "px")		
-                .style("top", (d3.event.pageY - 28) + "px");	
-            })					
-        .on("mouseout", function(d) {		
-            div.transition()		
-                .duration(500)		
-                .style("opacity", 0);	
-        });
-        
-});
-
-</script>
+<% if params[:report].nil? || params[:report] == "Yearly Adoptions" %>
+    <%= render partial: 'yearlyadoptions' %>
+<% elsif params[:report] == "Adoption by Dog Breeds" %>
+    <%= render partial: 'adoptionbydogbreed' %>
+<% end %>

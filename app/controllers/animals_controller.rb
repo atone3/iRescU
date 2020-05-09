@@ -104,14 +104,23 @@ class AnimalsController < ApplicationController
   #  @animal = Animal.select("id, outcome_date").where(outcometype: "Adoption")
    # @animals = @animal.group_by { |t| t.outcome_date.year }
    
-    if Rails.env.development?
-      @animals = Animal.select("strftime('%Y', outcome_date) as 'outcome_year', count(id) as 'total_id'").where(outcometype: "Adoption").group("strftime('%Y',outcome_date)")
-    else 
-      #EXTRACT(year FROM created_at)
-      @animals = Animal.select("EXTRACT(year FROM outcome_date) as outcome_year, count(id) as total_id").where(outcometype: "Adoption").group("EXTRACT(year FROM outcome_date)")
+   if params[:report] == "Adoption by Dog Breeds"
+     
+      @adoptions = Animal.select("breed, count(id) as adoptions").where(animaltype: "Dog", outcometype: "Adoption").group("breed")
+      @adoptions = @adoptions.order("adoptions ASC, breed DESC").to_json
+
+   else
+     
+      if Rails.env.development?
+        @animals = Animal.select("strftime('%Y', outcome_date) as 'outcome_year', count(id) as 'total_id'").where(outcometype: "Adoption").group("strftime('%Y',outcome_date)")
+      else 
+        #EXTRACT(year FROM created_at)
+        @animals = Animal.select("EXTRACT(year FROM outcome_date) as outcome_year, count(id) as total_id").where(outcometype: "Adoption").group("EXTRACT(year FROM outcome_date)")
+      end
+      
+      @animals = @animals.order("outcome_year ASC")
+      @animal_json = @animals.to_json
     end
-    @animals = @animals.order("outcome_year ASC")
-    @animal_json = @animals.to_json
     
     #@animals_cleaned = @animals.map{|a| {
     #  :id => a.id, :outcome_date => a.outcome_date.strftime("%Y")
