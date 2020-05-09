@@ -38,7 +38,7 @@ var data = jQuery.parseJSON(data_raw.replace(/&quot;/g,'"'));
 //console.log(data_raw);
 
 data.forEach(function(item) {
-   item.outcome_year = parseDate(item.outcome_year);
+   item.outcome_year = parseDate(("" + item.outcome_year));
 });
 
 x.domain(data.map(function(d) { return d.outcome_year; }));
