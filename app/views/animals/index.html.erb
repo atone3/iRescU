@@ -60,15 +60,15 @@
   <tbody>
     <% @animals.each do |animal| %>
       <tr>
-        <td><% if !animal.intake_date.nil? %><%= animal.intake_date.strftime('%-m/%-d/%Y') %><% end %></td>
+        <td><% if animal.intake_date.present? %><%= animal.intake_date.strftime('%-m/%-d/%Y') %><% end %></td>
         <td><%= animal.name %></td>
         <td><%= animal.animaltype %></td>
-        <td><%= animal.birthday %></td>
+        <td><% if animal.birthday.present? %><%= animal.birthday.strftime('%-m/%-d/%Y') %><% end %></td>
         <td><%= animal.sex %></td>
         <td><%= animal.breed %></td>
         <td><%= animal.outcometype %></td>
         <td><%= animal.outcomesubtype %></td>
-        <td><% if !animal.outcome_date.nil? %><%= animal.outcome_date.strftime('%-m/%-d/%Y') %><% end %></td>
+        <td><% if animal.outcome_date.present? %><%= animal.outcome_date.strftime('%-m/%-d/%Y') %><% end %></td>
         <td>
           <span class="text-nowrap">
           <%= link_to animal, :class => "hidden mr-1" do %>

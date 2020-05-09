@@ -22,7 +22,7 @@
     </div>
     <div class="col-4">
       <%= form.label :intake_date %>
-      <%= form.text_field :intake_date, :class => "datepicker form-control" %>
+      <%= form.text_field :intake_date, :class => "datepicker form-control bg-white" %>
     </div>
   </div>
   
@@ -40,7 +40,7 @@
     </div>
     <div class="col-6">
       <%= form.label :birthday %>
-      <%= form.text_field :birthday, :class => "form-control" %>
+      <%= form.text_field :birthday, :class => "datepicker form-control bg-white" %>
     </div>
   </div>
 
@@ -58,7 +58,7 @@
   <div class="form-group form-row">
     <div class="col-4">
       <%= form.label :outcome_date %>
-      <%= form.text_field :outcome_date, :class => "datepicker form-control" %>
+      <%= form.text_field :outcome_date, :class => "datepicker form-control bg-white" %>
     </div>
     <div class="col-4">
       <%= form.label "Outcome" %>
@@ -88,7 +88,7 @@
   <script>
     //Initialize date pickers
       $('.datepicker').pickadate({
-        format: 'm/d/yyyy'
+        format: 'mmm, d yyyy'
     });
     
     function toggleEnclosures() {

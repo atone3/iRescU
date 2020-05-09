@@ -32,10 +32,10 @@
           <h6 class="d-inline col-2">Color:</h6><%= @animal.color %>
       </li>
       <li class="list-group-item">
-        <h6 class="d-inline col-2">Birthday:</h6> <%= @animal.birthday %>
+        <h6 class="d-inline col-2">Birthday:</h6> <% if @animal.birthday.present? %><%= @animal.birthday.strftime('%-m/%-d/%Y') %><% end %>
       </li>
       <li class="list-group-item">
-        <h6 class="d-inline col-2">Location: </h6> <% if !@animal.enclosure_id.nil? %><%= Enclosure.find_by_id(@animal.enclosure_id).name %><% end %>
+        <h6 class="d-inline col-2">Location: </h6> <% if @animal.enclosure_id.present? %><%= Enclosure.find_by_id(@animal.enclosure_id).name %><% end %>
       </li>
       <li class="list-group-item">
         <h6 class="d-inline col-2">Intake Date:</h6> <%= @animal.intake_date.strftime('%-m/%-d/%Y') %>
