@@ -5,6 +5,10 @@
 
 <script>
 
+$(document).ready(function() {
+    
+
+
 var margin = {top: 30, right: 10, bottom: 90, left: 40},
     width = 960 - margin.left - margin.right,
     height = 530 - margin.top - margin.bottom;
@@ -90,5 +94,7 @@ y.domain([0, d3.max(data, function(d) { return d.total_id; })]);
                 .duration(500)		
                 .style("opacity", 0);	
         });
+        
+});
 
 </script>
