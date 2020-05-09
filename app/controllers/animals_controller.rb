@@ -108,7 +108,7 @@ class AnimalsController < ApplicationController
       @animals = Animal.select("strftime('%Y', outcome_date) as 'outcome_year', count(id) as 'total_id'").where(outcometype: "Adoption").group("strftime('%Y',outcome_date)")
     else 
       #EXTRACT(year FROM created_at)
-      @animals = Animal.select("EXTRACT(year FROM outcome_date) as 'outcome_year', count(id) as 'total_id'").where(outcometype: "Adoption").group("EXTRACT(year FROM outcome_date)")
+      @animals = Animal.select("EXTRACT(year FROM outcome_date) as outcome_year, count(id) as total_id").where(outcometype: "Adoption").group("EXTRACT(year FROM outcome_date)")
     end
     @animal_json = @animals.to_json
     
