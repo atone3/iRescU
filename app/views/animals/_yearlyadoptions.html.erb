@@ -5,16 +5,16 @@
 $(document).ready(function() {
 
 
-var margin = {top: 30, right: 10, bottom: 90, left: 40},
+var margin = {top: 40, right: 10, bottom: 90, left: 50},
     width = 960 - margin.left - margin.right,
-    height = 530 - margin.top - margin.bottom;
+    height = 560 - margin.top - margin.bottom;
 
 // Parse the date / time
 var	parseDate = d3.time.format("%Y").parse;
 
 // Define the div for the tooltip
 var div = d3.select("body").append("div")	
-    .attr("class", "tooltip")				
+    .attr("class", "tooltip-d3")				
     .style("opacity", 0);
 
 var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);

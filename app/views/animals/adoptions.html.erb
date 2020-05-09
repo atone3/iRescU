@@ -1,20 +1,20 @@
-<h1 class="my-4">Adoptions By Year</h1>
+<h1 class="my-4">Reports</h1>
 
 <%= form_tag("/animals/adoptions", method: :get) do %>
 <div class="form-row align-items-left">
   <div class="col-3">
-    <%= select_tag :report, options_for_select(["Yearly Adoptions", "Adoption by Breed"], 
+    <%= select_tag :report, options_for_select(["Yearly Adoptions", "Adoptions by Breed", "Outcomes by Breed"], 
         params[:report]), class: "form-control ml-0 mr-2",
         onchange: 'this.form.submit()' %>
   </div>
 
-  <% if params[:report] == "Adoption by Breed" %>
+  <% if params[:report] == "Adoptions by Breed" || params[:report] == "Outcomes by Breed" %>
     <div class="col-2">
       <%= select_tag :report_breed, options_for_select(["Cat", "Dog", "Bird", "Other"], params[:report_breed]), class: "form-control ml-0 mr-2", onchange: 'this.form.submit()' %>
     </div>
   <% end %>
 
-  <div class="col-auto">
+  <div class="col-auto d-none">
     <%= submit_tag 'Search', class: "btn btn-primary" %>
   </div>
 </div>
@@ -23,6 +23,8 @@
 
 <% if params[:report].nil? || params[:report] == "Yearly Adoptions" %>
     <%= render partial: 'yearlyadoptions' %>
-<% elsif params[:report] == "Adoption by Breed" %>
-    <%= render partial: 'adoptionbydogbreed' %>
+<% elsif params[:report] == "Adoptions by Breed" %>
+    <%= render partial: 'adoptionsbybreed' %>
+<% elsif params[:report] == "Outcomes by Breed" %>
+    <%= render partial: 'outcomes' %>
 <% end %>

@@ -15,7 +15,7 @@ class AnimalsController < ApplicationController
     @results_count = @animals.count
     
     # paginate results 
-    @animals = @animals.order("intake_date DESC").paginate(:page => params[:page], :per_page => 500)
+    @animals = @animals.order("intake_date DESC, updated_at DESC").paginate(:page => params[:page], :per_page => 500)
     
   end
 
@@ -103,16 +103,21 @@ class AnimalsController < ApplicationController
   def adoptions 
   #  @animal = Animal.select("id, outcome_date").where(outcometype: "Adoption")
    # @animals = @animal.group_by { |t| t.outcome_date.year }
+    if (params[:report_breed].nil?)
+     breed = "Cat" #default to Cat if not present since 1st in list
+    else
+     breed = params[:report_breed]
+    end
    
-   if params[:report] == "Adoption by Breed"
+   if params[:report] == "Adoptions by Breed"
      
-     if (params[:report_breed].nil?)
-       breed = "Cat"
-     else
-       breed = params[:report_breed]
-     end
       @adoptions = Animal.select("breed, count(id) as adoptions").where(animaltype: "#{breed}", outcometype: "Adoption").group("breed")
       @adoptions = @adoptions.order("adoptions ASC, breed DESC").to_json
+  
+   elsif params[:report] == "Outcomes by Breed"
+
+      @adoptions = Animal.select("outcometype, count(id) as totals").where(animaltype: "#{breed}").group("outcometype")
+      @adoptions = @adoptions.order("totals ASC, outcometype DESC").to_json
 
    else
      
