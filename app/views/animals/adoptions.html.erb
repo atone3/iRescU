@@ -3,10 +3,17 @@
 <%= form_tag("/animals/adoptions", method: :get) do %>
 <div class="form-row align-items-left">
   <div class="col-3">
-    <%= select_tag :report, options_for_select(["Yearly Adoptions", "Adoption by Cat Breeds", "Adoption by Dog Breeds"], 
+    <%= select_tag :report, options_for_select(["Yearly Adoptions", "Adoption by Breed"], 
         params[:report]), class: "form-control ml-0 mr-2",
         onchange: 'this.form.submit()' %>
   </div>
+
+  <% if params[:report] == "Adoption by Breed" %>
+    <div class="col-2">
+      <%= select_tag :report_breed, options_for_select(["Cat", "Dog", "Bird", "Other"], params[:report_breed]), class: "form-control ml-0 mr-2", onchange: 'this.form.submit()' %>
+    </div>
+  <% end %>
+
   <div class="col-auto">
     <%= submit_tag 'Search', class: "btn btn-primary" %>
   </div>
@@ -16,8 +23,6 @@
 
 <% if params[:report].nil? || params[:report] == "Yearly Adoptions" %>
     <%= render partial: 'yearlyadoptions' %>
-<% elsif params[:report] == "Adoption by Dog Breeds" %>
-    <%= render partial: 'adoptionbydogbreed' %>
-<% elsif params[:report] == "Adoption by Cat Breeds" %>
+<% elsif params[:report] == "Adoption by Breed" %>
     <%= render partial: 'adoptionbydogbreed' %>
 <% end %>

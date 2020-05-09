@@ -13,7 +13,7 @@
         left: 280
     };
     
-    var custom_mt = <% if params[:report] == "Adoption by Dog Breeds" %>-500<%else %>50<% end %>
+    var custom_mt = <% if params[:report_breed] == "Dog" %>-500<%else %>50<% end %>
     
     var calc_height = parseInt(data.length, 10) * 20;
 
