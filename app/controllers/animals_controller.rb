@@ -99,6 +99,19 @@ class AnimalsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def adoptions 
+  #  @animal = Animal.select("id, outcome_date").where(outcometype: "Adoption")
+   # @animals = @animal.group_by { |t| t.outcome_date.year }
+   
+   @animals = Animal.select("strftime('%Y', outcome_date) as 'outcome_year', count(id) as 'total_id'").where(outcometype: "Adoption").group("strftime('%Y',outcome_date)")
+  @animal_json = @animals.to_json
+    
+    #@animals_cleaned = @animals.map{|a| {
+    #  :id => a.id, :outcome_date => a.outcome_date.strftime("%Y")
+    #}}
+    # @animal_json = @animals_cleaned.to_json
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

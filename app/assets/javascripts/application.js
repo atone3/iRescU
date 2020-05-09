@@ -19,3 +19,4 @@
 //= require bootstrap-sprockets
 //= require pickadate/picker
 //= require pickadate/picker.date 
+//= require d3
