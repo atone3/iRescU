@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2020_05_08_235416) do
 
   create_table "animals", force: :cascade do |t|
     t.text "name"
-    t.datetime "birthday"
     t.text "outcometype"
     t.text "outcomesubtype"
     t.text "animaltype"
@@ -28,12 +27,10 @@ ActiveRecord::Schema.define(version: 2020_05_08_235416) do
     t.integer "enclosure_id"
     t.string "avatar_file_name"
     t.string "avatar_content_type"
-    t.integer "avatar_file_size"
+    t.bigint "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.datetime "birthday"
     t.index ["enclosure_id"], name: "index_animals_on_enclosure_id"
-  end
-
-  create_table "enclosure_relationships", force: :cascade do |t|
   end
 
   create_table "enclosures", force: :cascade do |t|
