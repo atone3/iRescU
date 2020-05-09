@@ -5,12 +5,17 @@
 
 <script>
 
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
-    width = 600 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+var margin = {top: 30, right: 10, bottom: 90, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 530 - margin.top - margin.bottom;
 
 // Parse the date / time
 var	parseDate = d3.time.format("%Y").parse;
+
+// Define the div for the tooltip
+var div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
 
 var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
 
@@ -71,6 +76,19 @@ y.domain([0, d3.max(data, function(d) { return d.total_id; })]);
       .attr("x", function(d) { return x(d.outcome_year); })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.total_id); })
-      .attr("height", function(d) { return height - y(d.total_id); });
+      .attr("height", function(d) { return height - y(d.total_id); })
+      .on("mouseover", function(d) {		
+            div.transition()		
+                .duration(200)		
+                .style("opacity", .9);		
+            div	.html(d.outcome_year.getFullYear() + "<br/>"  + d.total_id.toLocaleString() + " adoptions")	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+            })					
+        .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+        });
 
 </script>
