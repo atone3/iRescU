@@ -105,10 +105,11 @@ class AnimalsController < ApplicationController
    # @animals = @animal.group_by { |t| t.outcome_date.year }
    
    if params[:report] == "Adoption by Dog Breeds"
-     
       @adoptions = Animal.select("breed, count(id) as adoptions").where(animaltype: "Dog", outcometype: "Adoption").group("breed")
       @adoptions = @adoptions.order("adoptions ASC, breed DESC").to_json
-
+   elsif params[:report] == "Adoption by Cat Breeds"
+      @adoptions = Animal.select("breed, count(id) as adoptions").where(animaltype: "Cat", outcometype: "Adoption").group("breed")
+      @adoptions = @adoptions.order("adoptions ASC, breed DESC").to_json
    else
      
       if Rails.env.development?
