@@ -32,7 +32,17 @@ class AnimalsController < ApplicationController
 
   # GET /animals/1/edit
   def edit
-   
+    if @animal.intake_date.present?
+       @animal.intake_date = @animal.intake_date.strftime("%B %-d, %Y")
+    end
+    
+    if @animal.birthday.present?
+      @animal.birthday = @animal.intake_date.strftime("%B %-d, %Y")
+    end
+    
+    if @animal.outcome_date.present?
+      @animal.outcome_date = @animal.outcome_date.strftime("%B %-d, %Y")
+    end
   end
 
   # POST /animals

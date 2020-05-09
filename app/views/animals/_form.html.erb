@@ -40,7 +40,8 @@
     </div>
     <div class="col-6">
       <%= form.label :birthday %>
-      <%= form.text_field :birthday, :class => "datepicker form-control bg-white" %>
+
+         <%= form.text_field :birthday, :class => "datepicker form-control bg-white" %>
     </div>
   </div>
 
@@ -86,11 +87,11 @@
 <% end %>
 
   <script>
-    //Initialize date pickers
+       //Initialize date pickers
       $('.datepicker').pickadate({
-        format: 'mmm, d yyyy'
-    });
-    
+        format: 'mmmm, d yyyy'
+      });
+      
     function toggleEnclosures() {
       if ($("#outcome").val() === "Active") {
         $("#enclosures").show();
@@ -101,6 +102,7 @@
     }
     
     $(document).ready(function() {
+
       toggleEnclosures();
     });
   </script>
