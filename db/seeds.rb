@@ -28,8 +28,8 @@ end
 CSV.foreach(Rails.root.join('lib/Austin_Animal_Center_Outcomes.csv'), headers: true) do |row|
   
   name = row[0]
+  birthday = row[1]
   birthday = row[1].insert(-3, '20')
-  #birthday = Date.strptime(birthday, '%m/%d/%Y')
   
   if (name.blank? || name.nil? || name.include?("0") || name.include?("1") || name.include?("2") || name.include?("3") || name.include?("4") || name.include?("5") || name.include?("6") || name.include?("7") || name.include?("8") || name.include?("9"))
     if (row[4].downcase == 'cat')
