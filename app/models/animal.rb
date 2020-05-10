@@ -8,7 +8,13 @@ class Animal < ApplicationRecord
   validates :outcometype, presence: true
   
   validate :intake_date_must_be_before_or_equal_to_today
+  validate :birthday_must_be_before_or_equal_to_today
+  validate :outcome_date_must_be_before_or_equal_to_today
+  
   validate :intake_date_must_be_on_or_after_birthday
+
+
+
   validate :animal_must_have_a_location
   
   
@@ -32,9 +38,24 @@ class Animal < ApplicationRecord
       errors.add(:intake_date, "must be on or after the animal's birthday") unless intake_date >= birthday
     end
     
+    def outcome_date_must_be_on_or_after_birthday
+      return unless outcome_date and birthday
+      errors.add(:outcome_date, "must be on or after the animal's birthday") unless outcome_date >= birthday
+    end
+    
     def intake_date_must_be_before_or_equal_to_today
       return unless intake_date
       errors.add(:intake_date, "cannot be later than today") unless intake_date <= Date.today
     end
-     
+    
+    def birthday_must_be_before_or_equal_to_today
+      return unless birthday
+      errors.add(:birthday, "cannot be later than today") unless birthday <= Date.today
+    end
+    
+    def outcome_date_must_be_before_or_equal_to_today
+      return unless outcome_date
+      errors.add(:outcome_date, "cannot be later than today") unless outcome_date <= Date.today
+    end
+    
 end
