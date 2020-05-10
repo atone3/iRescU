@@ -22,7 +22,7 @@ class AnimalsController < ApplicationController
   
   # GET /animals/intakes
   def intakes
-    @animals = Animal.where(outcometype: 'Active')
+    @animals = Animal.where(outcometype: 'Active').order("animaltype, name")
   end
 
   # GET /animals/1
