@@ -10,7 +10,7 @@
 
   <% if params[:report] == "Adoptions by Breed" || params[:report] == "Outcomes by Breed" %>
     <div class="col-2">
-      <%= select_tag :report_breed, options_for_select(["Cat", "Dog", "Bird", "Other"], params[:report_breed]), class: "form-control ml-0 mr-2", onchange: 'this.form.submit()' %>
+      <%= select_tag :report_breed, options_for_select(["Cat", "Dog", "Bird", "Livestock", "Other"], params[:report_breed]), class: "form-control ml-0 mr-2", onchange: 'this.form.submit()' %>
     </div>
   <% end %>
 

@@ -15,7 +15,7 @@
     
     var custom_mt = <% if params[:report_breed] == "Dog" %>-500<%else %>50<% end %>
     
-    var calc_height = parseInt(data.length, 10) * 20;
+    var calc_height = <% if params[:report_breed] == "Livestock" %>60<% else %>parseInt(data.length, 10) * 20<% end %>;
 
     var width = 960 - margin.left - margin.right,
         height = calc_height - margin.top - margin.bottom;
