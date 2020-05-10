@@ -12,7 +12,6 @@
       <th>Intake Date</th>
       <th>Sex</th>
       <th>Breed</th>
-      <th>Status</th>
       <th>Remarks</th>
       <th></th>
     </tr>
@@ -27,7 +26,6 @@
         <td><% if animal.intake_date.present? %><%= animal.intake_date.strftime('%-m/%-d/%Y') %><% end %></td>
         <td><%= animal.sex %></td>
         <td><%= animal.breed %></td>
-        <td><%= animal.outcometype %></td>
         <td><%= animal.outcomesubtype %></td>
         <td>
           <span class="text-nowrap">
