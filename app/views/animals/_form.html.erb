@@ -16,11 +16,7 @@
       <%= form.label :name %>
       <%= form.text_field :name, :class => "form-control" %>
     </div>
-    <div class="col-4">
-      <%= form.label "Animal Type" %>
-      <%= form.select(:animaltype, ['Bird', 'Cat', 'Dog', 'Livestock', 'Other'], {}, {:class => "form-control"}) %>
-    </div>
-    <div class="col-4">
+    <div class="col-4 ml-4">
       <%= form.label :intake_date %>
       <%= form.text_field :intake_date, :class => "datepicker form-control bg-white", 
       value: @animal.intake_date.present? ? @animal.intake_date.strftime("%B %-d, %Y") : "" %>
@@ -28,18 +24,24 @@
   </div>
   
 
-    <div class="form-group">
-      <%= form.label :avatar %>
-      <%= form.file_field :avatar, :class => "form-control-file" %>
+    <div class="form-group form-row">
+      <div class="col-4">
+        <%= form.label "Animal Type" %>
+        <%= form.select(:animaltype, ['Bird', 'Cat', 'Dog', 'Livestock', 'Other'], {}, {:class => "form-control"}) %>
+      </div>
+      <div class="col-4 ml-4">
+        <%= form.label "Photo" %>
+        <%= form.file_field :avatar, :class => "form-control-file" %>
+      </div>
     </div>
 
   
   <div class="form-group form-row">
-    <div class="col-6">
+    <div class="col-4">
       <%= form.label :sex %>
       <%= form.select(:sex, ['Intact Female', 'Intact Male', 'Neutered Male', 'Spayed Female',  'Unknown'], {}, { :class => "form-control" }) %>
     </div>
-    <div class="col-6">
+    <div class="col-4 ml-4">
       <%= form.label :birthday %>
       <%= form.text_field :birthday, :class => "datepicker form-control bg-white", 
       value: @animal.birthday.present? ? @animal.birthday.strftime("%B %-d, %Y") : "" %>
@@ -47,11 +49,11 @@
   </div>
 
   <div class="form-group form-row">
-    <div class="col-6">
+    <div class="col-4">
       <%= form.label :breed %>
       <%= form.text_field :breed, list: "breeds", :class => "form-control", autocomplete: "off" %>
     </div>
-    <div class="col-6">
+    <div class="col-4 ml-4">
       <%= form.label :color %>
       <%= form.text_field :color, list: "colors", :class => "form-control" %>
       <datalist id="colors">
@@ -64,26 +66,28 @@
   
   <div class="form-group form-row">
     <div class="col-4">
-      <%= form.label :outcome_date %>
-      <%= form.text_field :outcome_date, :class => "datepicker form-control bg-white", 
-      value: @animal.outcome_date.present? ? @animal.outcome_date.strftime("%B %-d, %Y") : "" %>
-    </div>
-    <div class="col-4">
       <%= form.label "Status" %>
       <%= form.select(:outcometype, ['Active', 'Adoption', 'Died', 'Euthanasia', 'Missing', 'Return to Owner', 'Transfer'], {}, 
       {:class => "form-control", :id => "outcome", :onChange => "toggleEnclosures();"}) %>
     </div>
-    <div class="col-4">
-      <%= form.label "Remarks" %>
-      <%= form.text_field :outcomesubtype, :class => "form-control" %>
-    </div>
-  </div>
-
-  <div class="form-group form-row" id="enclosures">
-    <div class="col">
+        <div class="col-4 ml-4"  id="enclosures">
       <%= form.label "Enclosure" %>
       <%= form.select(:enclosure_id, Enclosure.where("animal_id is null or animal_id = :id", {id: @animal.id}).order(:name).map{ |e| [e.name, e.id]}, {:include_blank => true}, {:class => "form-control", :id => "enclosuresField"}) %>
     </div>
+    
+        <div class="col-4 ml-4" id="outcome_date">
+      <%= form.label :outcome_date %>
+      <%= form.text_field :outcome_date, :class => "datepicker form-control bg-white", 
+      value: @animal.outcome_date.present? ? @animal.outcome_date.strftime("%B %-d, %Y") : "" %>
+    </div>
+  </div>
+
+  <div class="form-group form-row">
+    <div class="col-4">
+      <%= form.label "Remarks" %>
+      <%= form.text_area :outcomesubtype, :class => "form-control" %>
+    </div>
+    
   </div>
   
   <div class="actions pt-3">
@@ -97,9 +101,11 @@
     function toggleEnclosures() {
       if ($("#outcome").val() === "Active") {
         $("#enclosures").show();
+        $("#outcome_date").hide();
       } else {
         $("#enclosuresField").val("")
         $("#enclosures").hide();
+        $("#outcome_date").show();
       }
     }
     
