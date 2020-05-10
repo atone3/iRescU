@@ -8,7 +8,7 @@ class AnimalsController < ApplicationController
     
     # check for search params
     @animals = Animal.where(
-      "name like :name and animaltype like :type and outcometype like :outcometype",
+      "name like :name and animaltype like :type and outcometype like :outcometype and outcometype != 'Active'",
       {name: "%#{params[:name]}%", type: "%#{params[:type]}%", outcometype: "%#{params[:outcometype]}%"}
     )
     
@@ -18,6 +18,11 @@ class AnimalsController < ApplicationController
     # paginate results 
     @animals = @animals.order("intake_date DESC, updated_at DESC").paginate(:page => params[:page], :per_page => 500)
     
+  end
+  
+  # GET /animals/intakes
+  def intakes
+    @animals = Animal.where(outcometype: 'Active')
   end
 
   # GET /animals/1
@@ -73,6 +78,7 @@ class AnimalsController < ApplicationController
     
     respond_to do |format|
       if @animal.update(animal_params)
+        
         if @animal.enclosure_id != enclosure && !enclosure.nil?
           Enclosure.find_by_id(enclosure).update_attribute(:animal_id, "") # clear previous
         end
@@ -80,6 +86,7 @@ class AnimalsController < ApplicationController
         if !@animal.enclosure_id.nil?
           Enclosure.find_by_id(@animal.enclosure_id).update_attribute(:animal_id, @animal.id)
         end
+        
         format.html { redirect_to @animal}
         flash[:success] = 'Record was successfully updated.'
         format.json { render :show, status: :ok, location: @animal }
@@ -128,7 +135,7 @@ class AnimalsController < ApplicationController
       if Rails.env.development?
         @animals = Animal.select("strftime('%Y', outcome_date) as 'outcome_year', count(id) as 'total_id'").where(outcometype: "Adoption").group("strftime('%Y',outcome_date)")
       else 
-        #EXTRACT(year FROM created_at)
+        #Syntax specific to PostgreSQL
         @animals = Animal.select("EXTRACT(year FROM outcome_date) as outcome_year, count(id) as total_id").where(outcometype: "Adoption").group("EXTRACT(year FROM outcome_date)")
       end
       

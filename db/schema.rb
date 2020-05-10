@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_08_235416) do
+ActiveRecord::Schema.define(version: 2020_05_10_123650) do
 
   create_table "animals", force: :cascade do |t|
     t.text "name"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_05_08_235416) do
     t.datetime "avatar_updated_at"
     t.datetime "birthday"
     t.index ["enclosure_id"], name: "index_animals_on_enclosure_id"
+    t.index ["outcometype"], name: "index_animals_on_outcometype"
   end
 
   create_table "enclosures", force: :cascade do |t|

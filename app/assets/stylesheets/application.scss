@@ -25,7 +25,8 @@ body {
 
 .navbar {
     border-top: 3px solid #ee2740;
-    box-shadow: 0 0px 7px rgba(0, 0, 0, 0.2)
+    box-shadow: 0 0px 7px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0 !important;
 }
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {

@@ -1,0 +1,52 @@
+<div class="d-flex my-4 p-0 align-items-baseline">
+  <div class="h1 mr-3">Adoptable Animals</div>
+  <div class="text-secondary"><%= "#{pluralize(number_with_delimiter(@animals.count, :delimiter => ','), 'animal')}" %></div>
+</div>
+
+<table class="table table-light table-hover">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Intake Date</th>
+      <th>Sex</th>
+      <th>Breed</th>
+      <th>Status</th>
+      <th>Remarks</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @animals.each do |animal| %>
+      <tr>
+        <td><%= animal.animaltype %></td>
+        <td><%= animal.name %></td>
+        <td><%= Enclosure.find_by_id(animal.enclosure_id).name %></td>
+        <td><% if animal.intake_date.present? %><%= animal.intake_date.strftime('%-m/%-d/%Y') %><% end %></td>
+        <td><%= animal.sex %></td>
+        <td><%= animal.breed %></td>
+        <td><%= animal.outcometype %></td>
+        <td><%= animal.outcomesubtype %></td>
+        <td>
+          <span class="text-nowrap">
+          <%= link_to animal, :class => "hidden mr-1" do %>
+            <i class="material-icons">description</i>
+          <% end %>
+
+          <%= link_to edit_animal_path(animal), :class => "hidden mr-1" do %>
+            <i class="material-icons text-success">edit</i>
+          <% end %>
+
+          <%= link_to animal, method: :delete, data: { confirm: 'Are you sure?' }, :class => "hidden" do %>
+            <i class="material-icons text-danger">remove_circle</i>
+          <% end %>
+          </span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

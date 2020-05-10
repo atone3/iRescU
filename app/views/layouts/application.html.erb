@@ -24,13 +24,20 @@
         <%= link_to root_path do %>
           <img src="/assets/irescu_logo.svg" width=160 />
         <% end %>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-4 mr-auto">
-            <li class="nav-item <% if controller.controller_name == "animals" && controller.action_name != "adoptions" %>active<% end %>">
-              <%= link_to animals_path, :class => "nav-link" do %>Animals<% end %>
+            <li class="nav-item dropdown <% if controller.controller_name == "animals" && controller.action_name != "adoptions" %>active<%end%>">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                 Animals
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item <% if controller.action_name == "intakes" %>active<%end%>" href="/animals/intakes">Adoptable Animals</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item <% if controller.controller_name == "animals" && controller.action_name == "index" %>active<%end%>" href="<%= animals_path %>">Past Animals</a>
+              </div>
             </li>
             <li class="nav-item <% if controller.controller_name == "enclosures" %>active<% end %>">
               <%= link_to enclosures_path, :class => "nav-link" do %>Map View<% end %>
@@ -51,7 +58,7 @@
   </nav>
 
     <% flash.each do |message_type, message| %>
-        <div class="mb-0 mt-0 alert alert-<%= message_type %> alert-dismissible fade show">
+        <div class="my-0 alert alert-<%= message_type %> alert-dismissible fade show">
           <div class="container">
           <%= message %>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">

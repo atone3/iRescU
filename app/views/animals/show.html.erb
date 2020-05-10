@@ -38,10 +38,10 @@
         <h6 class="d-inline col-2">Intake Date:</h6> <%= @animal.intake_date.strftime('%-m/%-d/%Y') %>
       </li>
       <li class="list-group-item">
-        <h6 class="d-inline col-2">Outcome: </h6> <%= @animal.outcometype %>
+        <h6 class="d-inline col-2">Status: </h6> <%= @animal.outcometype %>
       </li>
       <li class="list-group-item">
-        <h6 class="d-inline col-2">Outcome Subtype: </h6> <%= @animal.outcomesubtype %>
+        <h6 class="d-inline col-2">Remarks: </h6> <%= @animal.outcomesubtype %>
       </li>
       <li class="list-group-item">
         <h6 class="d-inline col-2">Outcome Date: </h6><% if !@animal.outcome_date.nil?%><%= @animal.outcome_date.strftime('%-m/%-d/%Y') %><% end %>
