@@ -20,7 +20,7 @@
   <body>
     
     <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white">
-      <div class="container py-1">
+      <div class="container py-1 pb-0">
         <%= link_to root_path do %>
           <img src="/assets/irescu_logo.svg" width=160 />
         <% end %>
@@ -50,8 +50,20 @@
     </div>
   </nav>
 
-    
+    <% flash.each do |message_type, message| %>
+        <div class="mb-0 mt-0 alert alert-<%= message_type %> alert-dismissible fade show">
+          <div class="container">
+          <%= message %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    <% end %>
+
     <div class="container">
+        
+    
       <%= yield %>
     </div>
   </body>

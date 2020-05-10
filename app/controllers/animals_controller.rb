@@ -1,6 +1,6 @@
 class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :edit, :update, :destroy]
-  before_action :colors, only: [:new, :edit, :update]
+  before_action :colors, only: [:new, :create, :edit, :update]
 
   # GET /animals
   # GET /animals.json
@@ -56,7 +56,8 @@ class AnimalsController < ApplicationController
         if !@animal.enclosure_id.nil?
           Enclosure.find_by_id(@animal.enclosure_id).update_attribute(:animal_id, @animal.id)
         end
-        format.html { redirect_to @animal, notice: 'Animal was successfully created.' }
+        format.html { redirect_to @animal }
+        flash[:success] = 'Record was successfully created.'
         format.json { render :show, status: :created, location: @animal }
       else
         format.html { render :new }
@@ -79,7 +80,8 @@ class AnimalsController < ApplicationController
         if !@animal.enclosure_id.nil?
           Enclosure.find_by_id(@animal.enclosure_id).update_attribute(:animal_id, @animal.id)
         end
-        format.html { redirect_to @animal, notice: 'Animal was successfully updated.' }
+        format.html { redirect_to @animal}
+        flash[:success] = 'Record was successfully updated.'
         format.json { render :show, status: :ok, location: @animal }
       else
         format.html { render :edit }
@@ -96,7 +98,8 @@ class AnimalsController < ApplicationController
       if !@animal.enclosure_id.nil?
         Enclosure.find_by_id(@animal.enclosure_id).update_attribute(:animal_id, "")
       end
-      format.html { redirect_to animals_url, notice: 'Animal was successfully destroyed.' }
+      format.html { redirect_to animals_url }
+      flash[:success] = 'Record was successfully deleted.'
       format.json { head :no_content }
     end
   end

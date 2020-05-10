@@ -66,6 +66,36 @@ div.tooltip-d3 {
     color: white;
 }
 
+
+.alert {
+    border-radius: 0;
+    letter-spacing:  .03rem;
+    padding: 0.5rem 1.25rem;
+}
+
+.alert-danger {
+    background-color: #ee021a;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+}
+
+.alert-success {
+    background-color: #10ac84;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+}
+
+button.close {
+    line-height: .5;
+}
+
+button.close:hover {
+    color: white;
+    opacity: 1;
+}
+
 /** breeds **/
         
         .bar {
