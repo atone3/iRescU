@@ -7,6 +7,7 @@ class Animal < ApplicationRecord
   validates :outcome_date, presence: true
   validates :outcometype, presence: true
   
+  validate :birds_livestock_and_other_cannot_be_active
   validate :intake_date_must_be_before_or_equal_to_today
   validate :birthday_must_be_before_or_equal_to_today
   validate :outcome_date_must_be_before_or_equal_to_today
@@ -31,6 +32,11 @@ class Animal < ApplicationRecord
     def animal_must_have_a_location
       return unless outcometype == "Active"
       errors.add(:enclosure_id, "must be selected for active animals") unless enclosure_id.present?
+    end
+    
+    def birds_livestock_and_other_cannot_be_active
+      return unless outcometype == "Active"
+      errors.add(:outcometype, "cannot be active for an animal of type Bird, Livestock, or Other") unless (animaltype == "Dog" or animaltype == "Cat")
     end
   
     def intake_date_must_be_on_or_after_birthday
