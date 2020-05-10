@@ -1,5 +1,6 @@
 class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :edit, :update, :destroy]
+  before_action :colors, only: [:new, :edit, :update]
 
   # GET /animals
   # GET /animals.json
@@ -27,7 +28,7 @@ class AnimalsController < ApplicationController
   # GET /animals/new
   def new
     @animal = Animal.new
-    @animal.intake_date = Date.today
+    @animal.intake_date = Date.today.strftime("%B %-d, %Y")
   end
 
   # GET /animals/1/edit
@@ -148,5 +149,9 @@ class AnimalsController < ApplicationController
     def animal_params
       params.require(:animal).permit(:name, :birthday, :outcometype, :outcomesubtype, 
       :animaltype, :sex, :breed, :color, :intake_date, :outcome_date, :enclosure_id, :avatar)
+    end
+    
+    def colors
+      @colors = Animal.select("color").distinct.order("color")
     end
 end

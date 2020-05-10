@@ -40,19 +40,23 @@
     </div>
     <div class="col-6">
       <%= form.label :birthday %>
-
-         <%= form.text_field :birthday, :class => "datepicker form-control bg-white" %>
+      <%= form.text_field :birthday, :class => "datepicker form-control bg-white" %>
     </div>
   </div>
 
   <div class="form-group form-row">
     <div class="col-6">
       <%= form.label :breed %>
-      <%= form.text_field :breed, :class => "form-control" %>
+      <%= form.text_field :breed, list: "breeds", :class => "form-control", autocomplete: "off" %>
     </div>
     <div class="col-6">
       <%= form.label :color %>
-      <%= form.text_field :color, :class => "form-control" %>
+      <%= form.text_field :color, list: "colors", :class => "form-control" %>
+      <datalist id="colors">
+        <% @colors.each do |item| %>
+          <option value="<%= item.color %>"></option>
+        <% end %>
+      </datalist>
     </div>
   </div>
   
@@ -71,7 +75,6 @@
       <%= form.text_field :outcomesubtype, :class => "form-control" %>
     </div>
   </div>
-  
 
   <div class="form-group form-row" id="enclosures">
     <div class="col">
@@ -102,7 +105,7 @@
     }
     
     $(document).ready(function() {
-
       toggleEnclosures();
+      setBreeds();
     });
   </script>

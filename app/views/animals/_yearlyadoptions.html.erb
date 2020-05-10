@@ -72,7 +72,7 @@ y.domain([0, d3.max(data, function(d) { return d.total_id; })]);
   svg.selectAll("bar")
       .data(data)
     .enter().append("rect")
-      .style("fill", "steelblue")
+      .style("fill", "#ee2740")
       .attr("x", function(d) { return x(d.outcome_year); })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.total_id); })
