@@ -31,20 +31,31 @@
       <li class="list-group-item">
         <h6 class="d-inline col-2">Birthday:</h6> <% if @animal.birthday.present? %><%= @animal.birthday.strftime('%-m/%-d/%Y') %><% end %>
       </li>
-      <li class="list-group-item">
-        <h6 class="d-inline col-2">Location: </h6> <% if @animal.enclosure_id.present? %><%= Enclosure.find_by_id(@animal.enclosure_id).name %><% end %>
-      </li>
+      <% if @animal.outcometype == "Active" %>
+        <li class="list-group-item">
+          <h6 class="d-inline col-2">Location: </h6> <% if @animal.enclosure_id.present? %><%= Enclosure.find_by_id(@animal.enclosure_id).name %><% end %>
+        </li>
+      <% else %>
+        <li class="list-group-item">
+          <h6 class="d-inline col-2">Outcome Date: </h6><% if !@animal.outcome_date.nil?%><%= @animal.outcome_date.strftime('%-m/%-d/%Y') %><% end %>
+        </li>
+      <% end %>
       <li class="list-group-item">
         <h6 class="d-inline col-2">Intake Date:</h6> <%= @animal.intake_date.strftime('%-m/%-d/%Y') %>
+      </li>
+      <li class="list-group-item">
+        <h6 class="d-inline col-2">Days Active:</h6> 
+          <% if @animal.outcometype == "Active" %>
+            <%= pluralize((Date.today - @animal.intake_date.to_date + 1).to_i, "day") %>
+          <% else %>
+            <%= pluralize((@animal.outcome_date.to_date - @animal.intake_date.to_date + 1).to_i, "day") %>
+          <% end %>
       </li>
       <li class="list-group-item">
         <h6 class="d-inline col-2">Status: </h6> <%= @animal.outcometype %>
       </li>
       <li class="list-group-item">
         <h6 class="d-inline col-2">Remarks: </h6> <%= @animal.outcomesubtype %>
-      </li>
-      <li class="list-group-item">
-        <h6 class="d-inline col-2">Outcome Date: </h6><% if !@animal.outcome_date.nil?%><%= @animal.outcome_date.strftime('%-m/%-d/%Y') %><% end %>
       </li>
     </ul>
 
