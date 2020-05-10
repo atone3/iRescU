@@ -11,6 +11,7 @@ class Animal < ApplicationRecord
   validate :intake_date_must_be_before_or_equal_to_today
   validate :birthday_must_be_before_or_equal_to_today
   validate :outcome_date_must_be_before_or_equal_to_today
+  validate :outcome_date_must_be_after_or_equal_to_intake_date
   
   validate :intake_date_must_be_on_or_after_birthday
 
@@ -62,6 +63,11 @@ class Animal < ApplicationRecord
     def outcome_date_must_be_before_or_equal_to_today
       return unless outcome_date
       errors.add(:outcome_date, "cannot be later than today") unless outcome_date <= Date.today
+    end
+    
+    def outcome_date_must_be_after_or_equal_to_intake_date
+      return unless outcome_date and intake_date
+      errors.add(:outcome_date, "cannot be earlier than intake date") unless outcome_date >= intake_date
     end
     
 end
