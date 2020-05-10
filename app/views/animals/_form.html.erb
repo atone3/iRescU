@@ -22,7 +22,7 @@
     </div>
     <div class="col-4">
       <%= form.label :intake_date %>
-      <%= form.text_field :intake_date, :class => "datepicker form-control bg-white" %>
+      <%= form.text_field :intake_date, :class => "datepicker form-control bg-white", value: @animal.intake_date.strftime("%B %-d, %Y") %>
     </div>
   </div>
   
@@ -40,7 +40,7 @@
     </div>
     <div class="col-6">
       <%= form.label :birthday %>
-      <%= form.text_field :birthday, :class => "datepicker form-control bg-white" %>
+      <%= form.text_field :birthday, :class => "datepicker form-control bg-white", value: @animal.birthday.strftime("%B %-d, %Y") %>
     </div>
   </div>
 
@@ -63,10 +63,10 @@
   <div class="form-group form-row">
     <div class="col-4">
       <%= form.label :outcome_date %>
-      <%= form.text_field :outcome_date, :class => "datepicker form-control bg-white" %>
+      <%= form.text_field :outcome_date, :class => "datepicker form-control bg-white", value: @animal.outcome_date.strftime("%B %-d, %Y") %>
     </div>
     <div class="col-4">
-      <%= form.label "Outcome" %>
+      <%= form.label "Status" %>
       <%= form.select(:outcometype, ['Active', 'Adoption', 'Died', 'Euthanasia', 'Missing', 'Return to Owner', 'Transfer'], {}, 
       {:class => "form-control", :id => "outcome", :onChange => "toggleEnclosures();"}) %>
     </div>
@@ -90,10 +90,7 @@
 <% end %>
 
   <script>
-       //Initialize date pickers
-      $('.datepicker').pickadate({
-        format: 'mmmm, d yyyy'
-      });
+
       
     function toggleEnclosures() {
       if ($("#outcome").val() === "Active") {
@@ -106,5 +103,14 @@
     
     $(document).ready(function() {
       toggleEnclosures();
+      
+      //Initialize date pickers
+      $('.datepicker').each(function() {
+        $( this ).pickadate({
+          format: 'mmmm d, yyyy'
+        });
+      });
+
+      
     });
   </script>

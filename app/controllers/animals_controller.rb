@@ -33,7 +33,8 @@ class AnimalsController < ApplicationController
   # GET /animals/new
   def new
     @animal = Animal.new
-    @animal.intake_date = Date.today.strftime("%B %-d, %Y")
+    # initialize dates
+    @animal.intake_date = @animal.birthday = @animal.outcome_date = Date.today
   end
 
   # GET /animals/1/edit
@@ -43,7 +44,7 @@ class AnimalsController < ApplicationController
     end
     
     if @animal.birthday.present?
-      @animal.birthday = @animal.intake_date.strftime("%B %-d, %Y")
+      @animal.birthday = @animal.birthday.strftime("%B %-d, %Y")
     end
     
     if @animal.outcome_date.present?

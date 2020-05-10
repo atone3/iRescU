@@ -4,6 +4,7 @@ class Animal < ApplicationRecord
   validates :name, presence: true
   validates :birthday, presence: true
   validates :intake_date, presence: true
+  validates :outcome_date, presence: true
   validates :outcometype, presence: true
   
   validate :intake_date_must_be_before_or_equal_to_today
