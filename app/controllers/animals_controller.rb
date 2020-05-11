@@ -101,11 +101,11 @@ class AnimalsController < ApplicationController
   # DELETE /animals/1
   # DELETE /animals/1.json
   def destroy
-    @animal.destroy
-    respond_to do |format|
-      if !@animal.enclosure_id.nil?
+          if !@animal.enclosure_id.nil?
         Enclosure.find_by_id(@animal.enclosure_id).update_attribute(:animal_id, "")
       end
+    @animal.destroy
+    respond_to do |format|
       format.html { redirect_to animals_url }
       flash[:success] = 'Record was successfully deleted.'
       format.json { head :no_content }
